@@ -10,6 +10,7 @@ public class MainClass {
 		int x = 0, level = 0;
 		long timeUser, zstNachher, zstVorher;
 		Warri warriHummel=new Warri();
+		Warri warriEnemy=new Warri();
 		
 		System.out
 				.println("Erstelle deinen Warrior, du kannst 70 Punkte beliebig verteilen");
@@ -32,19 +33,18 @@ public class MainClass {
 		System.out.println("Warrior: " + name + " Leben: " + warriHummel.getLife()
 				+ " Angriff: " + warriHummel.getAttack() + " Beweglichkeit: " + warriHummel.getAgi());
 
-		int[] warriCPU = new int[3];
-		warriCPU[0] = (int) ((Math.random() * 10) + 20);
-		warriCPU[1] = (int) ((Math.random() * 10) + 20);
-		warriCPU[2] = (int) 70 - warriCPU[0] - warriCPU[1];
-		System.out.println("CPU Leben: " + warriCPU[0] + " Angriff: "
-				+ warriCPU[1] + " Beweglichkeit: " + warriCPU[2]);
+		warriEnemy.setLife((int) ((Math.random() * 10) + 20));
+		warriEnemy.setAttack((int) ((Math.random() * 10) + 20));
+		warriEnemy.setAgiForPc((int) 70);
+		System.out.println("CPU Leben: " + warriEnemy.getLife() + " Angriff: "
+				+ warriEnemy.getAttack() + " Beweglichkeit: " + warriEnemy.getAgi());
 		char goGo = IOTools.readChar("Kann es losgehen?");
 		if (goGo == 'j') {
 		}
 		// Start round
 		System.out.println("");
 		int round = 0;
-		while (warriCPU[0] > 0 && warriHummel.getLife() > 0) {
+		while (warriEnemy.getLife() > 0 && warriHummel.getLife() > 0) {
 			round = round + 1;
 			System.out.println("");
 			System.out.println("Runde " + round + ":");
@@ -76,32 +76,32 @@ public class MainClass {
 			int botDef = (int) ((Math.random() * 10 * level));
 			botDef = attackUser * botDef / 100;
 			System.out.println("CPU blockt " + botDef + " Schaden");
-			warriCPU[0] = warriCPU[0] - attackUser + botDef;
+			warriEnemy.setLife(warriEnemy.getLife() - attackUser + botDef);
 			System.out.println("");
 			// Ende Verteidigung Bot
-			if (warriCPU[0] <= 0) {
+			if (warriEnemy.getLife() <= 0) {
 				System.out.println(name + " gewinnt!");
 				level++;
 			} else {
 				// Angriff Bot
 				switch (level) {
 				case 1:
-					attackCPU = warriCPU[1] * 5 / 10;
+					attackCPU = warriEnemy.getAttack() * 5 / 10;
 					break;
 				case 2:
-					attackCPU = warriCPU[1] * 6 / 10;
+					attackCPU = warriEnemy.getAttack() * 6 / 10;
 					break;
 				case 3:
-					attackCPU = warriCPU[1] * 7 / 10;
+					attackCPU = warriEnemy.getAttack() * 7 / 10;
 					break;
 				case 4:
-					attackCPU = warriCPU[1] * 8 / 10;
+					attackCPU = warriEnemy.getAttack() * 8 / 10;
 					break;
 				case 5:
-					attackCPU = warriCPU[1] * 9 / 10;
+					attackCPU = warriEnemy.getAttack() * 9 / 10;
 					break;
 				default:
-					attackCPU = warriCPU[1];
+					attackCPU = warriEnemy.getAttack();
 					break;
 				}
 
@@ -114,7 +114,7 @@ public class MainClass {
 				} catch (Exception ex) { /* !! DOUH !! */
 				}
 				;
-				userDef = warriCPU[1] / 2;
+				userDef = warriEnemy.getAttack() / 2;
 				System.out.println(name + " blockt " + userDef + " Schaden");
 				warriHummel.setLife(warriHummel.getLife() - attackCPU + userDef);
 				System.out.println("");
@@ -128,14 +128,14 @@ public class MainClass {
 					Thread.sleep(1000);
 				} catch (Exception ex) { /* !! DOUH !! */
 				}
-				;
+				
 				System.out.println(name + " Leben: " + warriHummel.getLife()
-						+ "  CPU Leben: " + warriCPU[0]);
+						+ "  CPU Leben: " + warriEnemy.getLife());
 				try {
 					Thread.sleep(1000);
 				} catch (Exception ex) { /* !! DOUH !! */
 				}
-				;
+				
 				System.out.println();
 
 				char again = IOTools.readChar("Nächste Runde Starten?");

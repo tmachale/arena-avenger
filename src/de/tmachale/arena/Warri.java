@@ -21,6 +21,8 @@ public class Warri {
 	public void setAgi(int agi) {
 		this.agi = agi;
 	}
-
+	public void setAgiForPc(int agi) {
+		this.agi = agi-life-attack;
+	}
 	
 }
