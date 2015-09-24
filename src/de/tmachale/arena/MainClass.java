@@ -6,10 +6,11 @@ public class MainClass {
 
 	public static void main(String[] args) {
 
-		int all, life, attack, agi, read, attackUser, attackCPU, longAttack, timeInt, userDef;
+		int all, read, attackUser, attackCPU, longAttack, timeInt, userDef;
 		int x = 0, level = 0;
 		long timeUser, zstNachher, zstVorher;
-
+		Warri warriHummel=new Warri();
+		
 		System.out
 				.println("Erstelle deinen Warrior, du kannst 70 Punkte beliebig verteilen");
 		String name = IOTools.readString("Gib den Namen deines Warris ein: ");
@@ -18,22 +19,18 @@ public class MainClass {
 				System.out
 						.println("Werte ergeben nicht 70. Bitte erneut eingeben:");
 			}
-			life = IOTools.readInteger("Leben:");
-			attack = IOTools.readInteger("Angriff:");
-			agi = IOTools.readInteger("Beweglichkeit:");
-			all = life + attack + agi;
+			warriHummel.setLife(IOTools.readInteger("Leben:"));
+			warriHummel.setAttack(IOTools.readInteger("Angriff:"));
+			warriHummel.setAgi(IOTools.readInteger("Beweglichkeit:"));
 			x = x + 1;
-		} while (all != 70);
+		} while (warriHummel.getLife()+warriHummel.getAttack()+warriHummel.getAgi() != 70);
 
-		int[] warriHuman = new int[3];
-		warriHuman[0] = life;
-		warriHuman[1] = attack;
-		warriHuman[2] = agi;
+		
 
 		System.out.println("");
 		System.out.println("Level " + (level + 1));
-		System.out.println("Warrior: " + name + " Leben: " + life
-				+ " Angriff: " + attack + " Beweglichkeit: " + agi);
+		System.out.println("Warrior: " + name + " Leben: " + warriHummel.getLife()
+				+ " Angriff: " + warriHummel.getAttack() + " Beweglichkeit: " + warriHummel.getAgi());
 
 		int[] warriCPU = new int[3];
 		warriCPU[0] = (int) ((Math.random() * 10) + 20);
@@ -47,7 +44,7 @@ public class MainClass {
 		// Start round
 		System.out.println("");
 		int round = 0;
-		while (warriCPU[0] > 0 && warriHuman[0] > 0) {
+		while (warriCPU[0] > 0 && warriHummel.getLife() > 0) {
 			round = round + 1;
 			System.out.println("");
 			System.out.println("Runde " + round + ":");
@@ -66,7 +63,7 @@ public class MainClass {
 					+ " ms");
 			timeUser = zstNachher - zstVorher;
 			timeInt = (int) timeUser;
-			attackUser = warriHuman[1] * 600 / timeInt;
+			attackUser = warriHummel.getAttack() * 600 / timeInt;
 			System.out.println(name + " greift mit " + attackUser + " an!");
 			// Ende Angriff Spieler
 
@@ -119,10 +116,10 @@ public class MainClass {
 				;
 				userDef = warriCPU[1] / 2;
 				System.out.println(name + " blockt " + userDef + " Schaden");
-				warriHuman[0] = warriHuman[0] - attackCPU + userDef;
+				warriHummel.setLife(warriHummel.getLife() - attackCPU + userDef);
 				System.out.println("");
 				// Ende Verteidigung
-				if (warriHuman[0] <= 0) {
+				if (warriHummel.getLife() <= 0) {
 					System.out.println(name + " hat leider verloren.");
 					System.exit(0);
 				}
@@ -132,7 +129,7 @@ public class MainClass {
 				} catch (Exception ex) { /* !! DOUH !! */
 				}
 				;
-				System.out.println(name + " Leben: " + warriHuman[0]
+				System.out.println(name + " Leben: " + warriHummel.getLife()
 						+ "  CPU Leben: " + warriCPU[0]);
 				try {
 					Thread.sleep(1000);
