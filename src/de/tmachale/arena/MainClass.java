@@ -57,107 +57,106 @@ public class MainClass {
 			int randomNumb = (int) ((Math.random() * 10));
 			System.out.println("Drücke " + randomNumb);
 			zstVorher = System.currentTimeMillis();
-			read = IOTools.readInteger();
+			do {
+				read = IOTools.readInteger();
+			} while (read != randomNumb);
 
-			if (read == randomNumb) {
-				zstNachher = System.currentTimeMillis();
-				System.out.println("Zeit benötigt: "
-						+ ((zstNachher - zstVorher)) + " ms");
-				timeUser = zstNachher - zstVorher;
-				timeInt = (int) timeUser;
-				attackUser = warriHuman[1] * 600 / timeInt;
-				System.out.println(name + " greift mit " + attackUser + " an!");
-				// Ende Angriff Spieler
+			zstNachher = System.currentTimeMillis();
+			System.out.println("Zeit benötigt: " + ((zstNachher - zstVorher))
+					+ " ms");
+			timeUser = zstNachher - zstVorher;
+			timeInt = (int) timeUser;
+			attackUser = warriHuman[1] * 600 / timeInt;
+			System.out.println(name + " greift mit " + attackUser + " an!");
+			// Ende Angriff Spieler
 
-				// Verteidigung Bot
+			// Verteidigung Bot
+			try {
+				Thread.sleep(1000);
+			} catch (Exception ex) { /* !! DOUH !! */
+			}
+			;
+			int botDef = (int) ((Math.random() * 10 * level));
+			botDef = attackUser * botDef / 100;
+			System.out.println("CPU blockt " + botDef + " Schaden");
+			warriCPU[0] = warriCPU[0] - attackUser + botDef;
+			System.out.println("");
+			// Ende Verteidigung Bot
+			if (warriCPU[0] <= 0) {
+				System.out.println(name + " gewinnt!");
+				level++;
+			} else {
+				// Angriff Bot
+				switch (level) {
+				case 1:
+					attackCPU = warriCPU[1] * 5 / 10;
+					break;
+				case 2:
+					attackCPU = warriCPU[1] * 6 / 10;
+					break;
+				case 3:
+					attackCPU = warriCPU[1] * 7 / 10;
+					break;
+				case 4:
+					attackCPU = warriCPU[1] * 8 / 10;
+					break;
+				case 5:
+					attackCPU = warriCPU[1] * 9 / 10;
+					break;
+				default:
+					attackCPU = warriCPU[1];
+					break;
+				}
+
+				System.out.println("CPU greift mit " + attackCPU + " an!");
+				// Ende Agriff Bot
+
+				// Verteidigung Spieler
 				try {
 					Thread.sleep(1000);
 				} catch (Exception ex) { /* !! DOUH !! */
 				}
 				;
-				int botDef = (int) ((Math.random() * 10 * level));
-				botDef = attackUser * botDef / 100;
-				System.out.println("CPU blockt " + botDef + " Schaden");
-				warriCPU[0] = warriCPU[0] - attackUser + botDef;
+				userDef = warriCPU[1] / 2;
+				System.out.println(name + " blockt " + userDef + " Schaden");
+				warriHuman[0] = warriHuman[0] - attackCPU + userDef;
 				System.out.println("");
-				// Ende Verteidigung Bot
-				if (warriCPU[0] <= 0) {
-					System.out.println(name + " gewinnt!");
-					level++;
-				} else {
-					// Angriff Bot
-					switch (level) {
-					case 1:
-						attackCPU = warriCPU[1] * 5 / 10;
-						break;
-					case 2:
-						attackCPU = warriCPU[1] * 6 / 10;
-						break;
-					case 3:
-						attackCPU = warriCPU[1] * 7 / 10;
-						break;
-					case 4:
-						attackCPU = warriCPU[1] * 8 / 10;
-						break;
-					case 5:
-						attackCPU = warriCPU[1] * 9 / 10;
-						break;
-					default:
-						attackCPU = warriCPU[1];
-						break;
-					}
-
-					System.out.println("CPU greift mit " + attackCPU + " an!");
-					// Ende Agriff Bot
-
-					// Verteidigung Spieler
-					try {
-						Thread.sleep(1000);
-					} catch (Exception ex) { /* !! DOUH !! */
-					}
-					;
-					userDef = warriCPU[1] / 2;
-					System.out
-							.println(name + " blockt " + userDef + " Schaden");
-					warriHuman[0] = warriHuman[0] - attackCPU + userDef;
-					System.out.println("");
-					// Ende Verteidigung
-					if (warriHuman[0] <= 0) {
-						System.out.println(name + " hat leider verloren.");
-						System.exit(0);
-					}
-					// Ausgabe Werte
-					try {
-						Thread.sleep(1000);
-					} catch (Exception ex) { /* !! DOUH !! */
-					}
-					;
-					System.out.println(name + " Leben: " + warriHuman[0]
-							+ "  CPU Leben: " + warriCPU[0]);
-					try {
-						Thread.sleep(1000);
-					} catch (Exception ex) { /* !! DOUH !! */
-					}
-					;
-					System.out.println();
-
-					char again = IOTools.readChar("Nächste Runde Starten?");
-					if (again == 'j') {
-
-					}
-					// System.out.println("3");
-					// try {Thread.sleep(1000); } catch(Exception ex) { /* !!
-					// DOUH !! */ };
-					// System.out.println("2");
-					// try {Thread.sleep(1000); } catch(Exception ex) { /* !!
-					// DOUH !! */ };
-					// System.out.println("1");
-					// try {Thread.sleep(1000); } catch(Exception ex) { /* !!
-					// DOUH !! */ };
-					//
-					// try {Thread.sleep(3000); } catch(Exception ex) { /* !!
-					// DOUH !! */ };
+				// Ende Verteidigung
+				if (warriHuman[0] <= 0) {
+					System.out.println(name + " hat leider verloren.");
+					System.exit(0);
 				}
+				// Ausgabe Werte
+				try {
+					Thread.sleep(1000);
+				} catch (Exception ex) { /* !! DOUH !! */
+				}
+				;
+				System.out.println(name + " Leben: " + warriHuman[0]
+						+ "  CPU Leben: " + warriCPU[0]);
+				try {
+					Thread.sleep(1000);
+				} catch (Exception ex) { /* !! DOUH !! */
+				}
+				;
+				System.out.println();
+
+				char again = IOTools.readChar("Nächste Runde Starten?");
+				if (again == 'j') {
+
+				}
+				// System.out.println("3");
+				// try {Thread.sleep(1000); } catch(Exception ex) { /* !!
+				// DOUH !! */ };
+				// System.out.println("2");
+				// try {Thread.sleep(1000); } catch(Exception ex) { /* !!
+				// DOUH !! */ };
+				// System.out.println("1");
+				// try {Thread.sleep(1000); } catch(Exception ex) { /* !!
+				// DOUH !! */ };
+				//
+				// try {Thread.sleep(3000); } catch(Exception ex) { /* !!
+				// DOUH !! */ };
 
 			}
 			// Ende round
