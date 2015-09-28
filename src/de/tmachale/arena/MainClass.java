@@ -3,7 +3,7 @@ package de.tmachale.arena;
 import Prog1Tools.IOTools;
 
 public class MainClass {
-
+// Test
 	public static void main(String[] args) {
 
 		int all, read, attackUser, attackCPU, longAttack, timeInt, userDef;
