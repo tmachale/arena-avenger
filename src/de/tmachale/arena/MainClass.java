@@ -6,7 +6,7 @@ public class MainClass {
 
 	public static void main(String[] args) {
 
-		int all, read, attackUser, attackCPU, longAttack, timeInt, userDef;
+		int read, attackUser, attackCPU, timeInt, userDef;
 		int x = 0, level=1;
 		long timeUser, zstNachher, zstVorher;
 		Warri warriHummel=new Warri();
@@ -29,14 +29,15 @@ public class MainClass {
 
 	
 	do {
+		System.out.println("");
 		System.out.println("Level:"+level);
 		System.out.println("");
 		System.out.println("Warrior: " + name + " Leben: " + warriHummel.getLife()
 				+ " Angriff: " + warriHummel.getAttack() + " Beweglichkeit: " + warriHummel.getAgi());
 
-		warriEnemy.setLife((int) ((Math.random() * 10) + 20));
-		warriEnemy.setAttack((int) ((Math.random() * 10) + 20));
-		warriEnemy.setAgiForPc((int) 70);
+		warriEnemy.setLife((int) ((Math.random() * 10) + 10)+10*level);
+		warriEnemy.setAttack((int) ((Math.random() * 10) + 10)+10*level);
+		warriEnemy.setAgiForPc((int) 50+20*level);
 		System.out.println("CPU Leben: " + warriEnemy.getLife() + " Angriff: "
 				+ warriEnemy.getAttack() + " Beweglichkeit: " + warriEnemy.getAgi());
 		char goGo = IOTools.readChar("Kann es losgehen?");
@@ -85,7 +86,7 @@ public class MainClass {
 				
 			}else{
 				// Angriff Bot
-					attackCPU = warriEnemy.getAttack() * 5 / 10;
+					attackCPU = warriEnemy.getAttack();
 				System.out.println("CPU greift mit " + attackCPU + " an!");
 				// Ende Agriff Bot
 
@@ -95,7 +96,7 @@ public class MainClass {
 				} catch (Exception ex) { /* !! DOUH !! */
 				}
 				;
-				userDef = warriEnemy.getAttack() / 2;
+				userDef = warriEnemy.getAttack() /10; //need better balance
 				System.out.println(name + " blockt " + userDef + " Schaden");
 				warriHummel.setLife(warriHummel.getLife() - attackCPU + userDef);
 				System.out.println("");
@@ -128,6 +129,7 @@ public class MainClass {
 		}
 			// Ende round
 				level++;
+				warriHummel.setLife(70-warriHummel.getAgi()-warriHummel.getAttack());
 				}while (warriHummel.getLife() > 0);
 		}
 
