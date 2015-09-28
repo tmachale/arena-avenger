@@ -3,11 +3,11 @@ package de.tmachale.arena;
 import Prog1Tools.IOTools;
 
 public class MainClass {
-// Test
+
 	public static void main(String[] args) {
 
 		int all, read, attackUser, attackCPU, longAttack, timeInt, userDef;
-		int x = 0, level = 0;
+		int x = 0;
 		long timeUser, zstNachher, zstVorher;
 		Warri warriHummel=new Warri();
 		Warri warriEnemy=new Warri();
@@ -29,7 +29,6 @@ public class MainClass {
 		
 
 		System.out.println("");
-		System.out.println("Level " + (level + 1));
 		System.out.println("Warrior: " + name + " Leben: " + warriHummel.getLife()
 				+ " Angriff: " + warriHummel.getAttack() + " Beweglichkeit: " + warriHummel.getAgi());
 
@@ -73,7 +72,7 @@ public class MainClass {
 			} catch (Exception ex) { /* !! DOUH !! */
 			}
 			;
-			int botDef = (int) ((Math.random() * 10 * level));
+			int botDef = (int) ((Math.random() * 10 * 1));
 			botDef = attackUser * botDef / 100;
 			System.out.println("CPU blockt " + botDef + " Schaden");
 			warriEnemy.setLife(warriEnemy.getLife() - attackUser + botDef);
@@ -81,30 +80,10 @@ public class MainClass {
 			// Ende Verteidigung Bot
 			if (warriEnemy.getLife() <= 0) {
 				System.out.println(name + " gewinnt!");
-				level++;
-			} else {
+				
+			}else{
 				// Angriff Bot
-				switch (level) {
-				case 1:
 					attackCPU = warriEnemy.getAttack() * 5 / 10;
-					break;
-				case 2:
-					attackCPU = warriEnemy.getAttack() * 6 / 10;
-					break;
-				case 3:
-					attackCPU = warriEnemy.getAttack() * 7 / 10;
-					break;
-				case 4:
-					attackCPU = warriEnemy.getAttack() * 8 / 10;
-					break;
-				case 5:
-					attackCPU = warriEnemy.getAttack() * 9 / 10;
-					break;
-				default:
-					attackCPU = warriEnemy.getAttack();
-					break;
-				}
-
 				System.out.println("CPU greift mit " + attackCPU + " an!");
 				// Ende Agriff Bot
 
@@ -142,31 +121,14 @@ public class MainClass {
 				if (again == 'j') {
 
 				}
-				// System.out.println("3");
-				// try {Thread.sleep(1000); } catch(Exception ex) { /* !!
-				// DOUH !! */ };
-				// System.out.println("2");
-				// try {Thread.sleep(1000); } catch(Exception ex) { /* !!
-				// DOUH !! */ };
-				// System.out.println("1");
-				// try {Thread.sleep(1000); } catch(Exception ex) { /* !!
-				// DOUH !! */ };
-				//
-				// try {Thread.sleep(3000); } catch(Exception ex) { /* !!
-				// DOUH !! */ };
-
+				}
 			}
 			// Ende round
 		}
-		//
-	}
 
 	public String getWarri() {
 		String s = "blub";
 		return s;
 	}
-	// public Integer theAttack(){
-	// System.out.println(name+"greift an!");
-
-	// }
+	
 }
