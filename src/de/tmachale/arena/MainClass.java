@@ -7,7 +7,7 @@ public class MainClass {
 	public static void main(String[] args) {
 
 		int all, read, attackUser, attackCPU, longAttack, timeInt, userDef;
-		int x = 0;
+		int x = 0, level=1;
 		long timeUser, zstNachher, zstVorher;
 		Warri warriHummel=new Warri();
 		Warri warriEnemy=new Warri();
@@ -17,8 +17,7 @@ public class MainClass {
 		String name = IOTools.readString("Gib den Namen deines Warris ein: ");
 		do {
 			if (x > 0) {
-				System.out
-						.println("Werte ergeben nicht 70. Bitte erneut eingeben:");
+				System.out.println("Werte ergeben nicht 70. Bitte erneut eingeben:");
 			}
 			warriHummel.setLife(IOTools.readInteger("Leben:"));
 			warriHummel.setAttack(IOTools.readInteger("Angriff:"));
@@ -28,6 +27,9 @@ public class MainClass {
 
 		
 
+	
+	do {
+		System.out.println("Level:"+level);
 		System.out.println("");
 		System.out.println("Warrior: " + name + " Leben: " + warriHummel.getLife()
 				+ " Angriff: " + warriHummel.getAttack() + " Beweglichkeit: " + warriHummel.getAgi());
@@ -119,11 +121,14 @@ public class MainClass {
 
 				char again = IOTools.readChar("Nächste Runde Starten?");
 				if (again == 'j') {
-
+					
 				}
 				}
-			}
+	
+		}
 			// Ende round
+				level++;
+				}while (warriHummel.getLife() > 0);
 		}
 
 	public String getWarri() {
